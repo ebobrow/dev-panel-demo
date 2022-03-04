@@ -1,24 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import { Class } from "./components/Class";
+import { Tools } from "./components/Tools";
+import { Class as ClassType } from "./types";
 
 function App() {
+  const [classes, setClasses] = useState<ClassType[]>([]);
+  const [active, setActive] = useState<string | null>(null);
+
+  const addEvent = (event: ClassType) => {
+    setClasses(curr => [...curr, event]);
+  };
+
+  const deleteEvent = (id: string) => {
+    setClasses(curr => curr.filter(c => c.id !== id));
+  };
+
+  const editEvent = (event: ClassType) => {
+    setClasses(curr => curr.map(c => (c.id === event.id ? event : c)));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="Classes">
+        {classes
+          .sort((a, b) => (a.start > b.start ? 1 : -1))
+          .map(c => (
+            <Class
+              key={c.id}
+              onClick={() => {
+                if (active === c.name) {
+                  setActive(null);
+                } else {
+                  setActive(c.name);
+                }
+              }}
+              event={c}
+              active={active === c.name}
+            />
+          ))}
+      </div>
+      <div className="Tools">
+        <Tools
+          addEvent={addEvent}
+          deleteEvent={deleteEvent}
+          editEvent={editEvent}
+          active={active ? classes.find(c => c.name === active) : null}
+        />
+      </div>
     </div>
   );
 }
