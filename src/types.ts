@@ -14,5 +14,12 @@ export interface ScheduleItem {
 }
 
 export type ScheduleItemTool = ScheduleItem & {
-  id: string; // ADDED FOR DEV PANEL
+  id: string;
 };
+
+export interface StudentScheduleWithMessage {
+  message: string;
+}
+
+// either an actual schedule or just a message
+export type StudentSchedule = ScheduleItem[] | StudentScheduleWithMessage;

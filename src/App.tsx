@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./App.module.css";
-import { Class } from "./components/Class";
+import { Schedule } from "./components/Schedule";
 import { Tools } from "./components/Tools";
 import { ScheduleItemTool } from "./types";
 
@@ -10,38 +10,14 @@ function App() {
   ]);
   const [active, setActive] = useState<string | null>(null);
 
-  // const addEvent = (event: ScheduleItem) => {
-  //   setClasses(curr => [...curr, event]);
-  // };
-
-  // const deleteEvent = (id: string) => {
-  //   setClasses(curr => curr.filter(c => c.id !== id));
-  // };
-
-  // const editEvent = (event: ScheduleItem) => {
-  //   setClasses(curr => curr.map(c => (c.id === event.id ? event : c)));
-  // };
-
+  // TODO: Date toggle (steal from V1), preset types?, ...
   return (
     <div className={styles.app}>
-      <div className={styles.classes}>
-        {events
-          .sort((a, b) => (a.start > b.start ? 1 : -1))
-          .map(c => (
-            <Class
-              key={c.id}
-              onClick={() => {
-                if (active === c.id) {
-                  setActive(null);
-                } else {
-                  setActive(c.id);
-                }
-              }}
-              event={c}
-              active={active === c.id}
-            />
-          ))}
-      </div>
+      <Schedule
+        currentSchedule={events}
+        active={active}
+        setActive={setActive}
+      />
       <div className={styles.tools}>
         <Tools
           setEvents={setEvents}

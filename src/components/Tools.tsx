@@ -19,7 +19,6 @@ export const Tools: React.FC<Props> = ({ setEvents, active }) => {
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
-          // setId("event-" + new Date().getTime());
           if (active) {
             setEvents(curr =>
               curr.map(e =>
@@ -83,6 +82,7 @@ const HandleActive: React.FC<{
 
   useEffect(() => {
     if (active) {
+      // TODO: number not copied
       setValues(active);
     } else {
       handleReset();
