@@ -1,15 +1,15 @@
-.App {
+.app {
   text-align: center;
   display: flex;
   flex-direction: row;
 }
 
-.Classes {
+.classes {
   width: 50%;
   margin: 5px;
 }
 
-.Tools {
+.tools {
   width: 50%;
   margin: 5px;
 }

@@ -1,19 +1,20 @@
-import { InputHTMLAttributes } from 'react';
-import { Class as ClassType } from '../types';
-import './Class.css';
+import { InputHTMLAttributes } from "react";
+import { ScheduleItemTool } from "../types";
+import styles from "./Class.module.css";
 
 interface Props {
   active: boolean;
-  event: ClassType;
+  event: ScheduleItemTool;
 }
 
+// TODO: steal from Schoop
 export const Class: React.FC<Props & InputHTMLAttributes<HTMLInputElement>> = ({
   event: { name, start, end },
   active,
   ...props
 }) => {
   return (
-    <div className={active ? 'Active Class' : 'Class'} {...props}>
+    <div className={active ? styles.active : styles.class} {...props}>
       <h1>{name}</h1>
       <p>
         {start} - {end}

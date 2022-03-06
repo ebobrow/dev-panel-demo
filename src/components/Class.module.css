@@ -1,7 +1,8 @@
-.Class {
+.class {
   border-style: solid;
 }
 
-.Active {
+.active {
+  composes: class;
   border-color: red;
 }
